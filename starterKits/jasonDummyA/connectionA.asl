@@ -29,3 +29,16 @@ random_dir(DirList,RandomNumber,Dir) :- (RandomNumber <= 0.25 & .nth(0,DirList,D
 
 +!move_random : .random(RandomNumber) & random_dir([n,s,e,w],RandomNumber,Dir)
 <-  move(Dir). 
+
++actionID(X) : true <- 
+    .print("Determining my action");
+    !move_towards_dispenser.
+
++!move_towards_dispenser : 
+    .status(carrying, false) & thing(_, _, dispenser, _) <- 
+    .print("Moving towards dispenser");
+    +step(X).
+
++!move_towards_dispenser : 
+    .status(carrying, true) <- 
+    .print("Already carrying a block, keep moving").
