@@ -1,4 +1,4 @@
-/* Initial beliefs and rules*/ 
+/* Initial beliefs and rules */
 random_dir(DirList,RandomNumber,Dir) :- (RandomNumber <= 0.25 & .nth(0,DirList,Dir)) | (RandomNumber <= 0.5 & .nth(1,DirList,Dir)) | (RandomNumber <= 0.75 & .nth(2,DirList,Dir)) | (.nth(3,DirList,Dir)).
 
 /* Initial goals */
@@ -7,38 +7,32 @@ random_dir(DirList,RandomNumber,Dir) :- (RandomNumber <= 0.25 & .nth(0,DirList,D
 
 /* Plans */
 
-+!start : true <- 
++step(X) :  thing(0,1,block,Blocktype) <- attach(s).
++step(X) :  thing(0,-1,block,Blocktype) <- attach(n).
++step(X) :  thing(-1,0,block,Blocktype) <- attach(w).
++step(X) :  thing(1,0,block,Blocktype) <- attach(e).
+
++step(X) :  thing(0,1,dispenser,Dispensertype) <- request(s).
++step(X) :  thing(0,-1,dispenser,Dispensertype) <- request(n).
++step(X) :  thing(-1,0,dispenser,Dispensertype) <- request(w).
++step(X) :  thing(1,0,dispenser,Dispensertype) <- request(e).
+
++step(X) :  thing(0,1,goal,GoalType) <- move(s).
++step(X) :  thing(0,-1,goal,GoalType) <- move(n).
++step(X) :  thing(-1,0,goal,GoalType) <- move(w).
++step(X) :  thing(1,0,goal,GoalType) <- move(e).
+
++step(X) :  thing(0,1,goal,GoalType) <- detach(s).
++step(X) :  thing(0,-1,goal,GoalType) <- detach(n).
++step(X) :  thing(-1,0,goal,GoalType) <- detach(w).
++step(X) :  thing(1,0,goal,GoalType) <- detach(e).
+
+/* +!start : true <- 
     .print("hello massim world.").
 
-+step(X) : thing(0,1,dispenser,_) <-
-    .request(s).
-
-+step(X) : thing(0,-1,dispenser,_) <-
-    .request(n).
-
-+step(X) : thing(1,0,dispenser,_) <-
-    .request(e).
-
-+step(X) : thing(-1,0,dispenser,_) <-
-    .request(w).
++step(X) : true <-
+    .print("Received step percept.").
     
 +actionID(X) : true <- 
     .print("Determining my action");
-    !move_random.
-//  skip.
-
-+!move_random : .random(RandomNumber) & random_dir([n,s,e,w],RandomNumber,Dir)
-<-  move(Dir). 
-
-+actionID(X) : true <- 
-    .print("Determining my action");
-    !move_towards_dispenser.
-
-+!move_towards_dispenser : 
-    .status(carrying, false) & thing(_, _, dispenser, _) <- 
-    .print("Moving towards dispenser");
-    +step(X).
-
-+!move_towards_dispenser : 
-    .status(carrying, true) <- 
-    .print("Already carrying a block, keep moving").
+    !move_random.*/
