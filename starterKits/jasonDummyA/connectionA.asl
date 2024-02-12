@@ -31,15 +31,14 @@ random_dir(DirList,RandomNumber,Dir) :- (RandomNumber <= 0.25 & .nth(0,DirList,D
 +step(X) :  thing(-1,0,block,Blocktype) & thing(-1,0,dispenser,Blocktype) <- attach(w); .print("blocks attached").
 +step(X) :  thing(1,0,block,Blocktype) & thing(1,0,dispenser,Blocktype)  <- attach(e); .print("blocks attached").
 
-//To attach multiple blocks
+/*//To attach multiple blocks
 //+step(X) : thing(0,1,block,Blocktype) & attached(0,1) & thing(0,1,dispenser,Blocktype)   <- attach(n); .print("blocks attached two").
 
-
-//To get the block to request the block
-+step(X) :  thing(0,1,dispenser,Dispensertype) <- request(s); .print("requested").
-+step(X) :  thing(0,-1,dispenser,Dispensertype) <- request(n); .print("requested").
-+step(X) :  thing(-1,0,dispenser,Dispensertype) <- attach(w); .print("requested").
-+step(X) :  thing(1,0,dispenser,Dispensertype) <- request(e); .print("requested").
++step(X) :  state(requested)&thing(0,1,block,Blocktype) & thing(0,1,dispenser,Blocktype) <- attach(s); .print("blocks attached"); -state(requested); +state(moveRandom).
++step(X) :  state(requested)&thing(0,-1,block,Blocktype) & thing(0,-1,dispenser,Blocktype) <- attach(n); .print("blocks attached"); -state(requested); +state(moveRandom).
++step(X) :  state(requested)&thing(-1,0,block,Blocktype) & thing(-1,0,dispenser,Blocktype) <- attach(w); .print("blocks attached"); -state(requested); +state(moveRandom).
++step(X) :  state(requested)&thing(1,0,block,Blocktype) & thing(1,0,dispenser,Blocktype) <- attach(e); .print("blocks attached"); -state(requested); +state(moveRandom).
+*/
 
 
 
