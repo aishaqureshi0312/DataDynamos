@@ -6,24 +6,11 @@ random_dir(DirList,RandomNumber,Dir) :- (RandomNumber <= 0.25 & .nth(0,DirList,D
 +!move_random : .random(RandomNumber) & random_dir([n,s,e,w],RandomNumber,Dir)
 <-  move(Dir).
 
-/*+!start : true <- 
-    .print("hello massim world.").*/
-
-/*+step(X) : true <-
-    .print("Received step percept."). */
-  
-
-//  skip.
-
-//!start.
-
-/* Plans */
-
-
-
 //This is the code to get the agent to submit the task in the goal
 
 +step(X) : goal(0,0) & attached(0,1) & task(TA,_,_,[req(0,1,Blocktype)])<- submit(TA); .print("request submitted").
+
+//This is tto rotate
 
 +step(X) : attached(1,0) & goal(0,0) <- rotate(cw); .print("rotating for east").
 +step(X) : attached(0,-1) & goal(0,0) <- rotate(cw); .print("rotating for north").
@@ -46,13 +33,9 @@ random_dir(DirList,RandomNumber,Dir) :- (RandomNumber <= 0.25 & .nth(0,DirList,D
 
 //To attach multiple blocks
 //+step(X) : thing(0,1,block,Blocktype) & attached(0,1) & thing(0,1,dispenser,Blocktype)   <- attach(n); .print("blocks attached two").
-/*+step(X) :  thing(0,1,block,Blocktype) & thing(0,1,dispenser,Blocktype) <- attach(s); .print("blocks attached").
-+step(X) : thing(0,-1,block,Blocktype) & thing(0,-1,dispenser,Blocktype)  <- attach(n); .print("blocks attached").
-+step(X) :  thing(-1,0,block,Blocktype) & thing(-1,0,dispenser,Blocktype) <- attach(w); .print("blocks attached").
-+step(X) :  thing(1,0,block,Blocktype) & thing(1,0,dispenser,Blocktype)  <- attach(e); .print("blocks attached").*/
 
 
-//To request the block
+//To get the block to request the block
 +step(X) :  thing(0,1,dispenser,Dispensertype) <- request(s); .print("requested").
 +step(X) :  thing(0,-1,dispenser,Dispensertype) <- request(n); .print("requested").
 +step(X) :  thing(-1,0,dispenser,Dispensertype) <- attach(w); .print("requested").
@@ -91,5 +74,5 @@ random_dir(DirList,RandomNumber,Dir) :- (RandomNumber <= 0.25 & .nth(0,DirList,D
 +step(X) : obstacle(-1,0) <- move(n); .print("avoiding obstacle").
 +step(X) : obstacle(1,0) <- move(e); .print("avoiding obstacle").
 
-
+//Code to move randomly
 +step(X) <- !move_random; .print("moving randomly").
