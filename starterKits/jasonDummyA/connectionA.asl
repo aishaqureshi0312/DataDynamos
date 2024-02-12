@@ -45,9 +45,9 @@ state(moveRandom).
 +step(X) : state(movetogoal)&attached(0,-1)&(not(attached(0,1))) & goal(0,0) <- rotate(cw); .print("rotating for north").
 +step(X) : state(movetogoal)&attached(-1,0)&(not(attached(0,1))) & goal(0,0) <- rotate(ccw); .print("rotating for west").
  
-//after submit back to state(MoveRandom). moving random is a initial state,until the agent find a trigger events,such as dicovering dispenser and goal
+//after submit back to state(MoveRandom), moving random is a initial state,until the agent find a trigger events,such as dicovering dispenser and goal
  
-+step(X) : state(submitted)&goal(0,0) & (not(attached(DX,DY)))<- .print("submitted,move randomly"); +state(moveRandom); -state(movetogoal) ; -state(submitted).
++step(X) : state(submitted)&goal(0,0) & (not(attached(DX,DY)))<- .print("submitted"); +state(moveRandom); -state(movetogoal) ; -state(submitted).
  
 //submit the block
 +step(X) : state(movetogoal)&goal(0,0) & attached(0,1) & task(TA,_,_,[req(0,1,Blocktype)])<- submit(TA); .print("request submitted"); +state(submitted).
@@ -83,7 +83,6 @@ state(moveRandom).
  
 //move random  
 +step(X) : true<-
-.print("move Randomly");
 !move_random.
  
 //defalut move random plan
